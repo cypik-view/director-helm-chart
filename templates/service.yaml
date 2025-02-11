@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ .Release.Name }}-view-director
+spec:
+  selector:
+    app: {{ .Release.Name }}-view-director
+  ports:
+      - protocol: TCP
+        port: {{ .Values.service.port }}
+        targetPort: 8511
