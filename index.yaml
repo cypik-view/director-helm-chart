@@ -1,0 +1,14 @@
+apiVersion: v1
+entries:
+  view-director:
+  - apiVersion: v2
+    appVersion: 1.16.0
+    created: "2025-02-12T10:29:59.529590489+05:30"
+    description: A Helm chart for Kubernetes
+    digest: 609c42d64f4fa58aca293489c112d69c6a13f670d0a55cb61515e9454e9ad838
+    name: view-director
+    type: application
+    urls:
+    - view-director-0.1.0.tgz
+    version: 0.1.0
+generated: "2025-02-12T10:29:59.528311876+05:30"
