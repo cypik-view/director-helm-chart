@@ -1,14 +1,15 @@
-{{- if .Values.persistentVolume.enabled }}
----
+{{- if .Values.pvc.enabled }}
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  name: {{ .Release.Name }}-view-director-pvc
+  name: {{ .Chart.Name }}-pvc
+  labels:
+    app: {{ .Release.Name }}
 spec:
   accessModes:
-    {{- toYaml .Values.persistentVolume.accessModes | nindent 4 }}
+    {{- toYaml .Values.pvc.accessModes | nindent 4 }}
   resources:
     requests:
-      storage: {{ .Values.persistentVolume.size }}
-  storageClassName: {{ .Values.persistentVolume.storageClass }}
+      storage: {{ .Values.pvc.resources.requests.storage }}
+  storageClassName: {{ .Values.pvc.storageClassName }}
   {{- end }}

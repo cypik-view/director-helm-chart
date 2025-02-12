@@ -1,11 +1,17 @@
+# templates/pvc.yaml
+
+  {{- if .Values.pvc.enabled }}
 apiVersion: v1
-kind: Service
+kind: PersistentVolumeClaim
 metadata:
-  name: {{ .Release.Name }}-view-director
+  name: {{ .Release.Name }}-pvc
+  labels:
+    app: {{ .Release.Name }}
 spec:
-  selector:
-    app: {{ .Release.Name }}-view-director
-  ports:
-      - protocol: TCP
-        port: {{ .Values.service.port }}
-        targetPort: 8511
+  accessModes:
+    {{- toYaml .Values.pvc.accessModes | nindent 4 }}
+  resources:
+    requests:
+      storage: {{ .Values.pvc.resources.requests.storage }}
+  storageClassName: {{ .Values.pvc.storageClassName }}
+  {{- end }}
