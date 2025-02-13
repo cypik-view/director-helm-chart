@@ -3,18 +3,18 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: {{ .Release.Name }}
+  name: {{ .Chart.Name }}
   labels:
-    app: {{ .Release.Name }}
+    app: {{ .Chart.Name }}
 spec:
   replicas: {{ .Values.replicaCount }}
   selector:
     matchLabels:
-      app: {{ .Release.Name }}
+      app: {{ .Chart.Name }}
   template:
     metadata:
       labels:
-        app: {{ .Release.Name }}
+        app: {{ .Chart.Name }}
     spec:
       containers:
         - name: vector
@@ -37,7 +37,7 @@ spec:
       volumes:
         - name: {{ .Values.configMap.name }}
           configMap:
-            name: {{ .Release.Name }}-view-director-config
+            name: {{ .Chart.Name }}-view-director-config
             items:
               - key: {{ .Values.configMap.key }}
                 path: {{ .Values.configMap.path }}

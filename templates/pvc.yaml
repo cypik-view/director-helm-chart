@@ -1,15 +1,14 @@
-{{- if .Values.pvc.enabled }}
 apiVersion: v1
-kind: PersistentVolumeClaim
+kind: Service
 metadata:
-  name: {{ .Chart.Name }}-pvc
+  name: {{ .Chart.Name }}-service
   labels:
-    app: {{ .Release.Name }}
+    app: {{ .Chart.Name }}
 spec:
-  accessModes:
-    {{- toYaml .Values.pvc.accessModes | nindent 4 }}
-  resources:
-    requests:
-      storage: {{ .Values.pvc.resources.requests.storage }}
-  storageClassName: {{ .Values.pvc.storageClassName }}
-  {{- end }}
+  type: {{ .Values.service.type }}
+  selector:
+    app: {{ .Chart.Name }}
+  ports:
+    - protocol: TCP
+      port: {{ .Values.service.port }}
+      targetPort: {{ .Values.service.targetPort }}
